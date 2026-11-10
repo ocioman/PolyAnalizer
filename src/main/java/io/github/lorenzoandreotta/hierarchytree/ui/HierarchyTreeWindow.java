@@ -39,11 +39,14 @@ public final class HierarchyTreeWindow {
             if (toolWindow == null) {
                 return;
             }
-            toolWindow.show(() -> {
-                if (panel != null) {
-                    panel.show(view, root);
-                }
-            });
+            toolWindow.show(() -> showInToolWindow(toolWindow, view, root));
         });
+    }
+
+    void showInToolWindow(@NotNull ToolWindow toolWindow, @NotNull AnalysisView view, @NotNull AnalysisNode root) {
+        if (panel == null) {
+            initialize(toolWindow);
+        }
+        panel.show(view, root);
     }
 }

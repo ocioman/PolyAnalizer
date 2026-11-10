@@ -29,13 +29,13 @@ public final class AnalyzeHierarchyAction extends AnAction {
 
     @Override
     public void update(@NotNull AnActionEvent event) {
-        event.getPresentation().setEnabledAndVisible(findClass(event.getData(CommonDataKeys.PSI_ELEMENT)) != null);
+        event.getPresentation().setEnabledAndVisible(findClass(ActionTarget.elementAtCaret(event)) != null);
     }
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
         Project project = event.getProject();
-        PsiClass selected = ReadAction.compute(() -> findClass(event.getData(CommonDataKeys.PSI_ELEMENT)));
+        PsiClass selected = ReadAction.compute(() -> findClass(ActionTarget.elementAtCaret(event)));
         if (project == null || selected == null) {
             return;
         }

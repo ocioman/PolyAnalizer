@@ -29,13 +29,13 @@ public final class AnalyzeDispatchAction extends AnAction {
 
     @Override
     public void update(@NotNull AnActionEvent event) {
-        event.getPresentation().setEnabledAndVisible(findCall(event.getData(CommonDataKeys.PSI_ELEMENT)) != null);
+        event.getPresentation().setEnabledAndVisible(findCall(ActionTarget.elementAtCaret(event)) != null);
     }
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
         Project project = event.getProject();
-        PsiMethodCallExpression selected = ReadAction.compute(() -> findCall(event.getData(CommonDataKeys.PSI_ELEMENT)));
+        PsiMethodCallExpression selected = ReadAction.compute(() -> findCall(ActionTarget.elementAtCaret(event)));
         if (project == null || selected == null) {
             return;
         }
