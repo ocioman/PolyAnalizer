@@ -27,5 +27,12 @@
                 description="Mostra supertipi, sottotipi e wildcard della classe selezionata">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
+        <action
+                id="HierarchyTree.AnalyzeDispatch"
+                class="io.github.lorenzoandreotta.hierarchytree.action.AnalyzeDispatchAction"
+                text="Spiega dispatch statico"
+                description="Mostra firma, candidati e criterio di specificità della chiamata selezionata">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
     </actions>
 </idea-plugin>
