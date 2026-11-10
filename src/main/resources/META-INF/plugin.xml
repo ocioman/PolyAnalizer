@@ -1,0 +1,21 @@
+<idea-plugin>
+    <id>io.github.lorenzoandreotta.hierarchy-tree</id>
+    <name>Hierarchy Tree</name>
+    <vendor>Lorenzo Andreotta</vendor>
+    <description><![CDATA[
+        Visualizza gerarchie Java, selezione statica dei metodi e dispatch dinamico osservato nel debugger.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.xdebugger</depends>
+    <depends>com.intellij.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow
+                id="Hierarchy Tree"
+                anchor="right"
+                secondary="true"
+                icon="AllIcons.Nodes.Class"
+                factoryClass="io.github.lorenzoandreotta.hierarchytree.ui.HierarchyTreeToolWindowFactory"/>
+    </extensions>
+</idea-plugin>

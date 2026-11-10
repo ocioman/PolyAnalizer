@@ -1,0 +1,9 @@
+.DS_Store
+KIMI/
+.gradle/
+.intellijPlatform/
+.idea/
+build/
+out/
+*.iml
+manual-demo/
