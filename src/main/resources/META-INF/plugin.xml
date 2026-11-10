@@ -18,4 +18,14 @@
                 icon="AllIcons.Nodes.Class"
                 factoryClass="io.github.lorenzoandreotta.hierarchytree.ui.HierarchyTreeToolWindowFactory"/>
     </extensions>
+
+    <actions>
+        <action
+                id="HierarchyTree.AnalyzeHierarchy"
+                class="io.github.lorenzoandreotta.hierarchytree.action.AnalyzeHierarchyAction"
+                text="Analizza gerarchia"
+                description="Mostra supertipi, sottotipi e wildcard della classe selezionata">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>
