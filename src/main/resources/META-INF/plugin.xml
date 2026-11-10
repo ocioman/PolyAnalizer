@@ -34,5 +34,12 @@
                 description="Mostra firma, candidati e criterio di specificità della chiamata selezionata">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
+        <action
+                id="HierarchyTree.CaptureDynamicDispatch"
+                class="io.github.lorenzoandreotta.hierarchytree.action.CaptureDynamicDispatchAction"
+                text="Acquisisci dispatch dinamico"
+                description="Legge il receiver reale e il metodo osservato nel frame Java sospeso">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
     </actions>
 </idea-plugin>
