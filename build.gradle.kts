@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.intellij.platform") version "2.20.1"
 }
 
-group = "io.github.lorenzoandreotta"
+group = "io.github.ocioman"
 version = providers.gradleProperty("pluginVersion").get()
 
 repositories {
@@ -52,10 +52,10 @@ intellijPlatform {
         name = providers.gradleProperty("pluginName")
         version = providers.gradleProperty("pluginVersion")
         description = providers.provider {
-            "Visualizza gerarchie Java, selezione statica dei metodi e dispatch dinamico osservato nel debugger."
+            "Displays Java hierarchies, static method selection and dynamic dispatch observed in the debugger."
         }
         vendor {
-            name = "Lorenzo Andreotta"
+            name = "ocioman"
         }
         ideaVersion {
             sinceBuild = providers.gradleProperty("pluginSinceBuild")
