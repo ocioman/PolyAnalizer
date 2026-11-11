@@ -39,7 +39,6 @@ public final class HierarchyTreeWindowTest extends BasePlatformTestCase {
         var root = new AnalysisNode(AnalysisNode.Kind.INFO, "Risultato", "", List.of(), null);
 
         window.showInToolWindow(toolWindow, AnalysisView.HIERARCHY, root);
-        UIUtil.dispatchAllInvocationEvents();
 
         assertEquals(1, contents.get());
     }
