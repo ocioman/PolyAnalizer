@@ -11,13 +11,11 @@ final class ActionTarget {
     }
 
     static @Nullable PsiElement elementAtCaret(@NotNull AnActionEvent event) {
-        var direct = event.getData(CommonDataKeys.PSI_ELEMENT);
-        if (direct != null) {
-            return direct;
-        }
-
         var editor = event.getData(CommonDataKeys.EDITOR);
         var file = event.getData(CommonDataKeys.PSI_FILE);
-        return editor == null || file == null ? null : file.findElementAt(editor.getCaretModel().getOffset());
+        if (editor != null && file != null) {
+            return file.findElementAt(editor.getCaretModel().getOffset());
+        }
+        return event.getData(CommonDataKeys.PSI_ELEMENT);
     }
 }
