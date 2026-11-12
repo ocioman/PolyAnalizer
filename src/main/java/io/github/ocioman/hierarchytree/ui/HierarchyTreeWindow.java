@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 @Service(Service.Level.PROJECT)
 public final class HierarchyTreeWindow {
-    public static final String TOOL_WINDOW_ID = "Hierarchy Tree";
+    public static final String TOOL_WINDOW_ID = "PolyAnalizer";
 
     private final Project project;
     private HierarchyTreePanel panel;

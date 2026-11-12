@@ -47,7 +47,7 @@ public final class CaptureDynamicDispatchAction extends AnAction {
             return;
         }
 
-        CheckedDisposable lifetime = Disposer.newCheckedDisposable(project, "Hierarchy Tree debugger capture");
+        CheckedDisposable lifetime = Disposer.newCheckedDisposable(project, "PolyAnalizer debugger capture");
         session.addSessionListener(new XDebugSessionListener() {
             @Override
             public void sessionResumed() {

@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public final class HierarchyTreeWindowTest extends BasePlatformTestCase {
+    public void testUsesPolyAnalizerToolWindowName() {
+        assertEquals("PolyAnalizer", HierarchyTreeWindow.TOOL_WINDOW_ID);
+    }
+
     public void testShowInitializesContentBeforeDisplayingAnalysis() {
         var contents = new AtomicInteger();
         var contentManager = (ContentManager) Proxy.newProxyInstance(

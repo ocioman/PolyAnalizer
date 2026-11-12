@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>io.github.ocioman.hierarchy-tree</id>
-    <name>Hierarchy Tree</name>
+    <name>PolyAnalizer</name>
     <vendor>ocioman</vendor>
     <description><![CDATA[
         Displays Java hierarchies, static method selection and dynamic dispatch observed in the debugger.
@@ -12,10 +12,10 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow
-                id="Hierarchy Tree"
+                id="PolyAnalizer"
                 anchor="right"
                 secondary="true"
-                icon="AllIcons.Nodes.Class"
+                icon="/icons/polyAnalizerToolWindow.svg"
                 factoryClass="io.github.ocioman.hierarchytree.ui.HierarchyTreeToolWindowFactory"/>
     </extensions>
 
