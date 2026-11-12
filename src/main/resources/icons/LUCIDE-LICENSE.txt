@@ -1,4 +1,4 @@
-PolyAnalizer icons are adapted from the Lucide "Network" icon.
+PolyAnalyzer icons are adapted from the Lucide "Network" icon.
 
 Official icon page: https://lucide.dev/icons/network
 Upstream SVG: https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/network.svg

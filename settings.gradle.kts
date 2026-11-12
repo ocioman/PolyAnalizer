@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "hierarchy-tree"
+rootProject.name = "poly-analyzer"

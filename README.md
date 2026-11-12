@@ -1,8 +1,8 @@
-# PolyAnalizer
+# PolyAnalyzer
 
-PolyAnalizer is an IntelliJ Platform plugin for inspecting Java type hierarchies and explaining method dispatch. It combines static PSI analysis with observations from a suspended Java debugger, without modifying the analyzed project.
+PolyAnalyzer is an IntelliJ Platform plugin for inspecting Java type hierarchies and explaining method dispatch. It combines static PSI analysis with observations from a suspended Java debugger, without modifying the analyzed project.
 
-The **PolyAnalizer** tool window contains three views:
+The **PolyAnalyzer** tool window contains three views:
 
 - **Hierarchy** — recursive supertypes, project subtypes, and bounded wildcard usages for a Java class or interface.
 - **Compile time** — the signature selected for a method call, alternative candidates, argument conversions, specificity comparisons, and the inheritance path to the selected declaration.
@@ -18,7 +18,7 @@ The **PolyAnalizer** tool window contains three views:
 
 ### IDE
 
-- IntelliJ Platform build **243 or later**; the project targets and verifies against **IntelliJ IDEA Community 2024.3**. No upper IDE build bound is declared.
+- IntelliJ Platform builds **243 through 253.\***. The generated plugin descriptor declares `since-build="243"` and `until-build="253.*"`; newer major IDE versions are excluded until their compatibility has been verified.
 - An IDE with the Java plugin and XDebugger support. The plugin declares dependencies on `com.intellij.modules.platform`, `com.intellij.modules.xdebugger`, and `com.intellij.java`.
 - A JDK configured for the Java project being inspected. The included manual demo is set up for Java 21.
 
@@ -33,31 +33,40 @@ Run commands from the repository root. On Windows, use `gradlew.bat` instead of 
 # Assemble the installable plugin ZIP in build/distributions/
 ./gradlew buildPlugin
 
-# Run the plugin verification task against the configured IDE
+# Verify the plugin against both configured IDE releases
 ./gradlew verifyPlugin
 
-# Optional: launch a development IDE with PolyAnalizer installed
+# Optional: launch a development IDE with PolyAnalyzer installed
 ./gradlew runIde
 ```
 
-The build uses Gradle 9.9.1, IntelliJ Platform Gradle Plugin 2.20.1, and JUnit 4.13.2. Tests cover hierarchy and wildcard analysis, static and runtime dispatch analysis, action targeting, and the three-view UI. Debugger tests construct snapshots directly; manual debugger capture can be exercised with `runIde` and the demo described below.
+The Gradle root project and plugin distribution base name are `poly-analyzer`. The build uses Gradle 9.9.1, IntelliJ Platform Gradle Plugin 2.20.1, and JUnit 4.13.2. Tests cover hierarchy and wildcard analysis, static and runtime dispatch analysis, action targeting, and the three-view UI. Debugger tests construct snapshots directly; manual debugger capture can be exercised with `runIde` and the demo described below.
+
+### IDE compatibility verification
+
+`./gradlew verifyPlugin` uses two fixed IDE versions, not a moving `latest()` or `recommended()` selection:
+
+- **IntelliJ IDEA Community 2024.3**, build **243.21565.193** (`IC-243.21565.193`).
+- **IntelliJ IDEA 2025.3**, build **253.28294.334** (`IU-253.28294.334`). This is the latest stable entry in JetBrains' official [IntelliJ IDEA Community release feed](https://data.services.jetbrains.com/products/releases?code=IIC&latest=true&type=release). The 2025.3 distribution is unified, so verification uses the `IntellijIdea` artifact rather than the discontinued standalone Community artifact.
+
+Both verifications completed as **Compatible** with IntelliJ Plugin Verifier **1.411**. Reports are written to `build/reports/pluginVerifier/`. The declared `untilBuild` is **253.\***, matching the latest verified release; do not extend it to a newer major build without adding that release to this matrix and rerunning verification.
 
 ## Install a private build from the ZIP
 
-This installation method does not require publishing PolyAnalizer to JetBrains Marketplace.
+This installation method does not require publishing PolyAnalyzer to JetBrains Marketplace.
 
 1. Run `./gradlew buildPlugin`.
-2. Locate the generated `.zip` file in `build/distributions/`. Its file name includes the Gradle project name and plugin version.
-3. In the IDE where PolyAnalizer will be used, open **Settings/Preferences | Plugins**.
+2. Locate `build/distributions/poly-analyzer-<version>.zip`.
+3. In the IDE where PolyAnalyzer will be used, open **Settings/Preferences | Plugins**.
 4. Open the gear menu and choose **Install Plugin from Disk...**.
 5. Select the ZIP itself, without extracting it, confirm the installation, and restart the IDE if prompted.
-6. Open **View | Tool Windows | PolyAnalizer**, or use the **PolyAnalizer** button on the right tool-window stripe.
+6. Open **View | Tool Windows | PolyAnalyzer**, or use the **PolyAnalyzer** button on the right tool-window stripe.
 
-To update a private installation, build the new ZIP and install it in the same way. The plugin ID is currently `io.github.ocioman.hierarchy-tree`.
+To update a private installation, build the new ZIP and install it in the same way. The plugin ID is currently `io.github.ocioman.poly-analyzer`. If you installed a private build from before the rename, uninstall that build first: its different plugin ID prevents IntelliJ from treating this ZIP as an update.
 
 ## Using the views
 
-All three actions are in the Java editor's context menu. An action opens the PolyAnalizer tool window, selects its corresponding tab, and replaces that tab's previous result. Double-click a source-backed node to navigate to its class, method, argument, or wildcard reference; nodes without a valid navigation target do nothing.
+All three actions are in the Java editor's context menu. An action opens the PolyAnalyzer tool window, selects its corresponding tab, and replaces that tab's previous result. Double-click a source-backed node to navigate to its class, method, argument, or wildcard reference; nodes without a valid navigation target do nothing.
 
 ### Hierarchy
 
@@ -100,7 +109,7 @@ Runtime capture is a snapshot of one selected frame, not a continuous execution 
 
 ## Manual demo
 
-The local `manual-demo/` directory contains a small Java project and a `Demo` application run configuration. Open it in the development IDE launched by `./gradlew runIde`, or in another IDE with the private ZIP installed. Configure a Java 21 project SDK; if necessary, adjust the run configuration's JRE setting because the supplied configuration references a local macOS Temurin 21 installation.
+The local `manual-demo/` directory contains a small Java project and a `Demo` application run configuration. Open it in the development IDE launched by `./gradlew runIde`, or in another IDE with the private ZIP installed. Configure a JDK 21 as the project SDK before running or debugging the demo.
 
 The demo is not a Gradle module and is separate from the automated test suite.
 
@@ -145,15 +154,15 @@ You can also inspect `inherited.speak()` and `overridden.speak()`. Both calls ha
 
 ### Packages and UI
 
-The user-facing name is **PolyAnalizer**. The current Java package root and plugin ID remain `io.github.ocioman.hierarchytree` and `io.github.ocioman.hierarchy-tree`, respectively.
+The user-facing name is **PolyAnalyzer**. The Java package root and plugin ID are `io.github.ocioman.polyanalyzer` and `io.github.ocioman.poly-analyzer`, respectively.
 
-- `io.github.ocioman.hierarchytree.action` resolves the caret target or current debugger frame and coordinates asynchronous actions.
-- `io.github.ocioman.hierarchytree.hierarchy` implements type and wildcard analysis.
-- `io.github.ocioman.hierarchytree.dispatch` implements static analysis, runtime PSI reconstruction, immutable debugger snapshots, and JDI capture.
-- `io.github.ocioman.hierarchytree.model` defines `AnalysisNode`, an immutable tree record whose children are defensively copied and whose optional `SmartPsiElementPointer` supports navigation after PSI changes.
-- `io.github.ocioman.hierarchytree.ui` contains the project-level tool-window service, factory, Swing tabbed panel, tree rendering, and double-click navigation.
+- `io.github.ocioman.polyanalyzer.action` resolves the caret target or current debugger frame and coordinates asynchronous actions.
+- `io.github.ocioman.polyanalyzer.hierarchy` implements type and wildcard analysis.
+- `io.github.ocioman.polyanalyzer.dispatch` implements static analysis, runtime PSI reconstruction, immutable debugger snapshots, and JDI capture.
+- `io.github.ocioman.polyanalyzer.model` defines `AnalysisNode`, an immutable tree record whose children are defensively copied and whose optional `SmartPsiElementPointer` supports navigation after PSI changes.
+- `io.github.ocioman.polyanalyzer.ui` contains the project-level tool-window service, factory, Swing tabbed panel, tree rendering, and double-click navigation.
 
-`plugin.xml` registers the PolyAnalizer tool window on the right and adds the three actions to `EditorPopupMenu`.
+`plugin.xml` registers the PolyAnalyzer tool window on the right and adds the three actions to `EditorPopupMenu`.
 
 ### PSI analysis
 

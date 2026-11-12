@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>io.github.ocioman.hierarchy-tree</id>
-    <name>PolyAnalizer</name>
+    <id>io.github.ocioman.poly-analyzer</id>
+    <name>PolyAnalyzer</name>
     <vendor>ocioman</vendor>
     <description><![CDATA[
         Displays Java hierarchies, static method selection and dynamic dispatch observed in the debugger.
@@ -12,31 +12,31 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow
-                id="PolyAnalizer"
+                id="PolyAnalyzer"
                 anchor="right"
                 secondary="true"
-                icon="/icons/polyAnalizerToolWindow.svg"
-                factoryClass="io.github.ocioman.hierarchytree.ui.HierarchyTreeToolWindowFactory"/>
+                icon="/icons/polyAnalyzerToolWindow.svg"
+                factoryClass="io.github.ocioman.polyanalyzer.ui.PolyAnalyzerToolWindowFactory"/>
     </extensions>
 
     <actions>
         <action
-                id="HierarchyTree.AnalyzeHierarchy"
-                class="io.github.ocioman.hierarchytree.action.AnalyzeHierarchyAction"
+                id="PolyAnalyzer.AnalyzeHierarchy"
+                class="io.github.ocioman.polyanalyzer.action.AnalyzeHierarchyAction"
                 text="Analyze Hierarchy"
                 description="Shows supertypes, subtypes and wildcards of the selected class">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
         <action
-                id="HierarchyTree.AnalyzeDispatch"
-                class="io.github.ocioman.hierarchytree.action.AnalyzeDispatchAction"
+                id="PolyAnalyzer.AnalyzeDispatch"
+                class="io.github.ocioman.polyanalyzer.action.AnalyzeDispatchAction"
                 text="Explain Static Dispatch"
                 description="Shows signature, candidates and specificity criteria of the selected call">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
         <action
-                id="HierarchyTree.CaptureDynamicDispatch"
-                class="io.github.ocioman.hierarchytree.action.CaptureDynamicDispatchAction"
+                id="PolyAnalyzer.CaptureDynamicDispatch"
+                class="io.github.ocioman.polyanalyzer.action.CaptureDynamicDispatchAction"
                 text="Capture Dynamic Dispatch"
                 description="Reads the actual receiver and method observed in the suspended Java frame">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
